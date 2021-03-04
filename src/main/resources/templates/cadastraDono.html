@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Veterinária Réplica</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- Main CSS-->
+<link href="css/main.css" rel="stylesheet" media="all">
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="fragments/menu :: menu"></div>
+		<div class="page-wrapper p-t-130 p-b-100 font-poppins">
+			<div class="wrapper wrapper--w680">
+				<div class="card card-4">
+
+					<div class="card-body">
+						<div class="container">
+							<h2 class="title">Cadastro de proprietário</h2>
+						</div>
+						
+						<form action="#" id="form1" th:action="@{/cadastraNovoDono}"
+							th:object="${dono}" method="post">
+
+							<div class="row row-space">
+								<div class="col-2">
+									<div class="input-group">
+										<label>Nome:</label> <input class="input--style-4" type="text"
+											th:field="*{nome}" required>
+									</div>
+								</div>
+							
+								<div class="col-2">
+									<div class="input-group">
+										<label>Animais:</label> <select class="input--style-4"
+											th:field="*{animais}" id="dropOperator" required>
+											<option value="0">Selecione um animal</option>
+											<option th:each="animal : ${animaisLista}"
+												th:value="${animal.id}" th:text="${animal.nomeAnimal}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div>
+								<label>ENDEREÇO</label>
+								<div class="row row-space">
+									<div class="col-2">
+										<div class="input-group">
+											<label>Rua:</label> <input class="input--style-4" type="text"
+												th:field="*{endereco.rua}" required>
+										</div>
+									</div>
+								
+									<div class="col-2">
+										<div class="input-group">
+											<label>Número:</label> <input class="input--style-4"
+												type="text" th:field="*{endereco.numeroResidencial}"
+												required>
+										</div>
+									</div>
+								</div>
+								<div class="row row-space">
+									<div class="col-2">
+										<div class="input-group">
+											<label>Telefone:</label> <input class="input--style-4"
+												type="text" th:field="*{endereco.telefone}" required>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div>
+								<input type="submit" value="Cadastrar" />
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
