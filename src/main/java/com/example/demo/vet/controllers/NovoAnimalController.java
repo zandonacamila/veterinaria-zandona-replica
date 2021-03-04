@@ -34,7 +34,8 @@ public class NovoAnimalController {
 			animalService.salva(animal);
 			
 		} catch(Exception e) {
-			redirAttrs.addFlashAttribute("errorMessage", e.getLocalizedMessage());
+			e.printStackTrace();
+			//redirAttrs.addFlashAttribute("errorMessage", e.getLocalizedMessage());
 			// criar uma classe de exceção customizada para arrumar aqui
 		}
 		
