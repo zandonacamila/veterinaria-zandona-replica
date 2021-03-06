@@ -21,13 +21,18 @@ public class AnimalService {
 
 	public void salva(Animal animal) throws Exception {
 
-		Animal animalDB = animalRepository.findByNomeAnimal(animal.getNomeAnimal()).get();
-		if(animalRepository.findByNomeAnimal(animal.getNomeAnimal()).isEmpty()) {
+		Animal animalDB;
+		
+		if(animalRepository.findByNomeAnimal(animal.getNomeAnimal()).isPresent()) {
+			animalDB = animalRepository.findByNomeAnimal(animal.getNomeAnimal()).get();
+		} else {
+			animalDB = null;
+		}
+		
+		if(animalDB == null) {
 			animalRepository.save(animal);
-		} else if (animalDB.getIdadeAnimal() != animal.getIdadeAnimal() ||
-				   animalDB.getEspecie() != animal.getEspecie() || 
-				   animalDB.getRaca() != animal.getRaca() || 
-				   animalDB.getNomeAnimal() != animal.getNomeAnimal()) {
+		
+		} else if (!animalDB.equals(animal)) {
  			animalRepository.save(animal);
 		} else {
 			throw new Exception();
