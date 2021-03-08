@@ -29,7 +29,7 @@
 						<div class="container">
 							<h2 class="title">Cadastro de proprietário</h2>
 						</div>
-						
+
 						<form action="#" id="form1" th:action="@{/cadastraNovoDono}"
 							th:object="${dono}" method="post">
 
@@ -40,7 +40,15 @@
 											th:field="*{nome}" required>
 									</div>
 								</div>
-							
+
+								<div class="col-2">
+									<div class="input-group">
+										<label>CPF:</label> <input class="input--style-4" type="text"
+											th:field="*{cpf}" required>
+									</div>
+								</div>
+							</div>
+							<div class="row row-space">
 								<div class="col-2">
 									<div class="input-group">
 										<label>Animais:</label> <select class="input--style-4"
@@ -51,6 +59,7 @@
 										</select>
 									</div>
 								</div>
+
 							</div>
 
 							<div>
@@ -62,7 +71,7 @@
 												th:field="*{endereco.rua}" required>
 										</div>
 									</div>
-								
+
 									<div class="col-2">
 										<div class="input-group">
 											<label>Número:</label> <input class="input--style-4"

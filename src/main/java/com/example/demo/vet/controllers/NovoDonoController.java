@@ -30,7 +30,6 @@ public class NovoDonoController {
 	@PostMapping("/cadastraNovoDono")
 	public String fazOCadastro(@ModelAttribute Dono dono, Model model, @ModelAttribute Endereco endereco, @ModelAttribute Animal animal) {
 		try {
-			donoService.salvaEndereco(endereco);
 			donoService.salva(dono);
 		} catch(Exception e) {
 			e.getMessage();

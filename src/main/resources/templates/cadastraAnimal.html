@@ -32,6 +32,7 @@
 							th:text="${errorMessage}"></div>
 						<form action="#" th:action="@{/cadastraNovoAnimal}"
 							th:object="${animal}" method="post">
+							<input type="hidden" th:value="${especie.id}" th:name="id" />
 
 							<div class="row row-space">
 								<div class="col-2">
@@ -47,6 +48,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="row row-space">
 								<div class="col-2">
 									<div class="input-group">
@@ -60,9 +62,8 @@
 								</div>
 								<div class="col-2">
 									<div class="input-group">
-										<label>Raça:</label> <input class="input--style-4"
-											th:field="*{raca}" type="text" th:text="${raca.nome}"
-											required>
+										<label>Raça:</label> <input class="input--style-4" type="text"
+											th:field="*{raca.nome}" required>
 									</div>
 								</div>
 							</div>

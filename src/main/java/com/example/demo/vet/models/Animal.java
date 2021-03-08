@@ -1,5 +1,6 @@
 package com.example.demo.vet.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,13 +19,14 @@ public class Animal {
 	@OneToOne
 	private Especie especie;
 	
-	private String raca;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Raca raca;
 
-	public String getRaca() {
+	public Raca getRaca() {
 		return raca;
 	}
 
-	public void setRaca(String raca) {
+	public void setRaca(Raca raca) {
 		this.raca = raca;
 	}
 

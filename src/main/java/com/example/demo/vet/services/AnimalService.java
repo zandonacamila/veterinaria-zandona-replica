@@ -19,8 +19,28 @@ public class AnimalService {
 	@Autowired
 	private EspecieRepository especieRepository;
 
-	public void salva(Animal animal) throws Exception {
+	@Autowired
+	private RacaRepository racaRepository;
+	
+	public void salvaAnimal(Animal animal) {
+		animalRepository.save(animal);	
+	}
 
+	public void salva(Animal animal, Integer id) throws Exception {
+
+		try {
+			validaAnimal(animal);
+			preparaAnimal(animal);
+			salvaAnimal(animal);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	
+	public void validaAnimal(Animal animal) {
+		
 		Animal animalDB;
 		
 		if(animalRepository.findByNomeAnimal(animal.getNomeAnimal()).isPresent()) {
@@ -28,29 +48,31 @@ public class AnimalService {
 		} else {
 			animalDB = null;
 		}
-		
-		if(animalDB == null) {
-			animalRepository.save(animal);
-		
-		} else if (!animalDB.equals(animal)) {
- 			animalRepository.save(animal);
-		} else {
-			throw new Exception();
-		}
 
+		try {
+			if(animalDB == null) {
+				preparaAnimal(animal);
+			} else if (!animalDB.equals(animal)) {
+				preparaAnimal(animal);
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
-
+	
+	public void preparaAnimal(Animal animal) {
+		
+		if(racaRepository.findAll().isEmpty()) {
+			animal.getRaca().setEspecie(animal.getEspecie());
+			animal.setRaca(animal.getRaca());
+		} else if(animal.getRaca().equals(racaRepository.findByNome(animal.getRaca().getNome()))){
+			
+			animal.setRaca(racaRepository.findByNome(animal.getRaca().getNome()));
+		
+		}
+	}
+	
 	public List<Especie> listaEspecies() {
 		return especieRepository.findAll();
 	}
-
-	//	public void validaRaca(Animal animal) {
-	//		if(animalRepository.findByRaca(animal) == null) {
-	//			animal.setRaca(animal.getRaca());
-	//			animal.getEspecie().addRaca(animal.getRaca());
-	//		} else {
-	//			animal.setRaca(animalRepository.findByRaca(animal));
-	//		}
-	//	}
-
 }

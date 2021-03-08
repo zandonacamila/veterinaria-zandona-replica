@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.vet.models.Animal;
@@ -29,9 +30,9 @@ public class NovoAnimalController {
 	}
 	
 	@PostMapping("/cadastraNovoAnimal")
-	public String fazOCadastro(@ModelAttribute Animal animal, Model model, RedirectAttributes redirAttrs) {
+	public String fazOCadastro(@RequestParam(value="id", required = false) Integer id, @ModelAttribute Animal animal, Model model, RedirectAttributes redirAttrs) {
 		try {
-			animalService.salva(animal);
+			animalService.salva(animal, id);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
